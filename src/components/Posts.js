@@ -1,18 +1,34 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 
-import { PostsContext } from '../contexts/PostsContext';
+import PostsContext from '../contexts/posts/postsContext';
+import Spinner from './layout/Spinner';
 
 const Posts = () => {
-  const { posts } = useContext(PostsContext);
+  const postsContext = useContext(PostsContext);
+  const { posts, getPosts, deletePost, loading } = postsContext; //deconstruct to get posts variable and getPosts function
   console.log(posts);
+
+  useEffect(() => {
+    // useEffect like componentDidMount - runs the getPosts function from PostsState via postsContext
+    getPosts();
+    // eslint-disable-next-line
+  }, []);
+
+  const handleDelete = id => {
+    deletePost(id);
+  };
 
   return (
     <div>
-      <ul>
-        {posts.map(post => (
-          <li key={post.id}>{post.title}</li>
-        ))}
-      </ul>
+      {posts.length > 0 && !loading ? (
+        posts.map(post => (
+          <div key={post.id} onClick={() => handleDelete(post.id)}>
+            {post.id} - {post.title}
+          </div>
+        ))
+      ) : (
+        <Spinner />
+      )}
     </div>
   );
 };

@@ -1,13 +1,13 @@
 import React from 'react';
 import Posts from './components/Posts';
-import PostsContextProvider from './contexts/PostsContext';
+import PostsState from './contexts/posts/PostsState';
 
 function App() {
   return (
     <div className='App'>
-      <PostsContextProvider>
+      <PostsState>
         <Posts />
-      </PostsContextProvider>
+      </PostsState>
     </div>
   );
 }
