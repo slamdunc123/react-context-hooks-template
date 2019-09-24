@@ -3,6 +3,8 @@ import React, { useContext, useEffect } from 'react';
 import PostsContext from '../contexts/posts/postsContext';
 import Spinner from './layout/Spinner';
 
+import PostsForm from './PostsForm';
+
 const Posts = () => {
   const postsContext = useContext(PostsContext);
   const { posts, getPosts, deletePost, loading } = postsContext; //deconstruct to get posts variable and getPosts function
@@ -23,12 +25,13 @@ const Posts = () => {
       {posts.length > 0 && !loading ? (
         posts.map(post => (
           <div key={post.id} onClick={() => handleDelete(post.id)}>
-            {post.id} - {post.title}
+            {post.id} - {post.title} - {post.author}
           </div>
         ))
       ) : (
         <Spinner />
       )}
+      <PostsForm />
     </div>
   );
 };

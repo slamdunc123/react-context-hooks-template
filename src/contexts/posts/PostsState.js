@@ -21,7 +21,7 @@ const PostsState = props => {
   };
 
   const [state, dispatch] = useReducer(postsReducer, initialState);
-  const postsURL = 'http://localhost:3300/posts';
+  const postsURL = 'http://localhost:3100/posts';
   // get posts
   const getPosts = async () => {
     try {
@@ -36,6 +36,30 @@ const PostsState = props => {
       //     type: CONTACT_ERROR,
       //     payload: err.response.msg
       //   });
+    }
+  };
+
+  // add post
+
+  const addPost = async post => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+
+    try {
+      const res = await axios.post(postsURL, post, config);
+
+      dispatch({
+        type: 'ADD_POST',
+        payload: res.data
+      });
+    } catch (err) {
+      // dispatch({
+      //   type: CONTACT_ERROR,
+      //   payload: err.response.msg
+      // });
     }
   };
 
@@ -56,6 +80,7 @@ const PostsState = props => {
       value={{
         posts: state.posts,
         getPosts,
+        addPost,
         deletePost
       }}
     >
