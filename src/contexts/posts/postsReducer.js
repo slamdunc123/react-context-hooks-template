@@ -1,33 +1,50 @@
-// import {
-//     GET_CONTACTS,
-//     ADD_CONTACT,
-//     DELETE_CONTACT,
-//     SET_CURRENT,
-//     CLEAR_CURRENT,
-//     UPDATE_CONTACT,
-//     FILTER_CONTACTS,
-//     CLEAR_FILTER,
-//     CONTACT_ERROR,
-//     CLEAR_CONTACTS
-//   } from '../types';
+import {
+  GET_POSTS,
+  ADD_POST,
+  DELETE_POST,
+  UPDATE_POST,
+  SET_CURRENT,
+  CLEAR_CURRENT
+} from '../types';
 
 export default (state, action) => {
   switch (action.type) {
-    case 'GET_POSTS':
+    case GET_POSTS:
       return {
         ...state,
         posts: action.payload
         // loading: false
       };
-    case 'ADD_POST':
+    case ADD_POST:
       return {
         ...state,
         posts: [action.payload, ...state.posts]
       };
-    case 'DELETE_POST':
+    case DELETE_POST:
       return {
         ...state,
         posts: state.posts.filter(post => post.id !== action.payload)
+      };
+
+    case UPDATE_POST:
+      return {
+        ...state,
+        posts: state.posts.map(post =>
+          post.id === action.payload.id ? action.payload : post
+        )
+        // loading: false
+      };
+
+    case SET_CURRENT:
+      return {
+        ...state,
+        current: action.payload
+      };
+
+    case CLEAR_CURRENT:
+      return {
+        ...state,
+        current: null
       };
     //   case ADD_CONTACT:
     //     return {
@@ -35,7 +52,7 @@ export default (state, action) => {
     //       contacts: [action.payload, ...state.contacts],
     //       loading: false
     //     };
-    //   case UPDATE_CONTACT:
+    // case UPDATE_CONTACT:
     //     return {
     //       ...state,
     //       contacts: state.contacts.map(contact =>

@@ -1,15 +1,16 @@
 import React from 'react';
-import Posts from './components/Posts';
+import Home from './components/pages/Home';
 import PostsState from './contexts/posts/PostsState';
+import './App.css';
 
-function App() {
+const App = () => {
   return (
     <div className='App'>
       <PostsState>
-        <Posts />
+        <Home />
       </PostsState>
     </div>
   );
-}
+};
 
 export default App;

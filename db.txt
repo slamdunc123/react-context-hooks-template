@@ -1,6 +1,8 @@
 npm install -g json-server
 json-server --watch db.json -p 3100
 
+(use data below if there is no data initially)
+
 {
   "posts": [
     { "id": 1, "title": "post1", "author": "author1" },
@@ -8,7 +10,5 @@ json-server --watch db.json -p 3100
     { "id": 3, "title": "post3", "author": "author3" },
     { "id": 4, "title": "post4", "author": "author4" },
     { "id": 5, "title": "post5", "author": "author5" }
-  ],
-  "comments": [{ "id": 1, "body": "some comment", "postId": 1 }],
-  "profile": { "name": "typicode" }
+  ]
 }
